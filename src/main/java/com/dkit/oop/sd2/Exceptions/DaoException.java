@@ -1,8 +1,9 @@
 package com.dkit.oop.sd2.Exceptions;
 
-/**     Feb 2022
- * A 'homemade' Exception to report exceptions
- *  arising in the Data Access Layer.
+/**
+ * Main author: Michael Atagamen
+ * Other contributors:
+ *
  */
 import java.sql.SQLException;
 

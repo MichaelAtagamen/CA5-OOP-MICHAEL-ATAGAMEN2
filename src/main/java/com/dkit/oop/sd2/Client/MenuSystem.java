@@ -1,9 +1,9 @@
-package com.dkit.oop.sd2.BusinessObjects;
+package com.dkit.oop.sd2.Client;
 
-import com.dkit.oop.sd2.DAOs.MySQLPlayerDAO;
-import com.dkit.oop.sd2.DAOs.PlayerDAO;
-import com.dkit.oop.sd2.DTOs.PlayerDTO;
-import com.dkit.oop.sd2.Exceptions.DaoException;
+import com.dkit.oop.sd2.Server.MySQLPlayerDAO;
+import com.dkit.oop.sd2.Server.PlayerDAO;
+import com.dkit.oop.sd2.Server.PlayerDTO;
+import com.dkit.oop.sd2.Server.DaoException;
 import com.dkit.oop.sd2.Utilities.JsonConverter;
 import com.google.gson.Gson;
 
@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.Comparator;
+
 
 /**
  * Main author: Michael Atagamen
@@ -50,6 +51,8 @@ public class MenuSystem {
                 System.out.println("4. Update Player");
                 System.out.println("5. Delete Player");
                 System.out.println("6. Filter Players by Age (Ascending)");
+                System.out.println("7. Display All Entities");
+                System.out.println("8. Add New Entity");
                 System.out.println("0. Exit");
                 System.out.print("Enter your choice: ");
                 choice = scanner.nextInt();
@@ -73,6 +76,12 @@ public class MenuSystem {
                     case 6:
                         filterPlayersByAge();
                         break;
+                    case 7:
+                        displayAllEntities();
+                        break;
+                    case 8:
+                        addNewEntity(scanner);
+                        break;
                     case 0:
                         System.out.println("Exiting the Menu System. Goodbye!");
                         break;
@@ -82,6 +91,40 @@ public class MenuSystem {
             } while (choice != 0);
         } catch (DaoException | InputMismatchException e) {
             System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private void addNewEntity(Scanner scanner) throws DaoException {
+        System.out.println("Adding a New Player:");
+
+        System.out.print("Enter Player Name: ");
+        String name = scanner.next();
+
+        System.out.print("Enter Player Rating: ");
+        float rating = scanner.nextFloat();
+
+        System.out.print("Enter Player Age: ");
+        int age = scanner.nextInt();
+
+        // Create a new PlayerDTO object with the entered details
+        PlayerDTO newPlayer = new PlayerDTO(name, rating, age);
+
+        // Call the insertPlayer method of the PlayerDAO to add the new player to the database
+        playerDao.insertPlayer(newPlayer);
+
+        System.out.println("New Player added successfully.");
+    }
+
+
+    private void displayAllEntities() throws DaoException {
+        List<PlayerDTO> entities = playerDao.getAllPlayers(); // Modify this to retrieve all entities
+        if (entities.isEmpty()) {
+            System.out.println("No entities found.");
+        } else {
+            System.out.println("All Entities:");
+            for (PlayerDTO entity : entities) {
+                System.out.println(entity);
+            }
         }
     }
 

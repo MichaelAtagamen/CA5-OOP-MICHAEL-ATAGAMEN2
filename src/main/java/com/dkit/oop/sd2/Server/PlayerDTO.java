@@ -1,4 +1,4 @@
-package com.dkit.oop.sd2.DTOs;
+package com.dkit.oop.sd2.Server;
 import com.google.gson.Gson;
 
 /**

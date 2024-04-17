@@ -1,4 +1,4 @@
-package com.dkit.oop.sd2.Exceptions;
+package com.dkit.oop.sd2.Server;
 
 /**
  * Main author: Michael Atagamen

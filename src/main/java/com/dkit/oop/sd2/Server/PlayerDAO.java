@@ -1,7 +1,4 @@
-package com.dkit.oop.sd2.DAOs;
-
-import com.dkit.oop.sd2.DTOs.PlayerDTO;
-import com.dkit.oop.sd2.Exceptions.DaoException;
+package com.dkit.oop.sd2.Server;
 
 import java.util.Comparator;
 import java.util.List;

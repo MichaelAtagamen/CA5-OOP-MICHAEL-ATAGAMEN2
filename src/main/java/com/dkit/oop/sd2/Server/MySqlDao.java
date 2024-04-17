@@ -1,8 +1,7 @@
-package com.dkit.oop.sd2.DAOs;
+package com.dkit.oop.sd2.Server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import com.dkit.oop.sd2.Exceptions.DaoException;
 
 
 /**

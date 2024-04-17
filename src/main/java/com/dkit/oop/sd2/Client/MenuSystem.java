@@ -128,6 +128,7 @@ public class MenuSystem {
         }
     }
 
+
     private void displayAllPlayers() throws DaoException {
         List<PlayerDTO> players = playerDao.getAllPlayers();
         if (players.isEmpty()) {

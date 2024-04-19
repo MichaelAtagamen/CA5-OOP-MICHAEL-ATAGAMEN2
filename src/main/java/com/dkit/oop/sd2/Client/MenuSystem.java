@@ -53,6 +53,7 @@ public class MenuSystem {
                 System.out.println("6. Filter Players by Age (Ascending)");
                 System.out.println("7. Display All Entities");
                 System.out.println("8. Add New Entity");
+                System.out.println("9. Delete Entity By ID");
                 System.out.println("0. Exit");
                 System.out.print("Enter your choice: ");
                 choice = scanner.nextInt();
@@ -81,6 +82,9 @@ public class MenuSystem {
                         break;
                     case 8:
                         addNewEntity(scanner);
+                        break;
+                    case 9:
+                        deleteIdEntity(scanner);
                         break;
                     case 0:
                         System.out.println("Exiting the Menu System. Goodbye!");
@@ -255,6 +259,33 @@ public class MenuSystem {
             System.out.println(player);
         }
     }
+
+    private void deleteIdEntity(Scanner scanner) throws DaoException {
+        System.out.println("Deleting Player:");
+
+        // Prompt the user to enter the player ID to delete
+        System.out.print("Enter Player ID to delete: ");
+        int playerId = scanner.nextInt();
+
+        // Check if the player with the specified ID exists
+        PlayerDTO existingPlayer = playerDao.getPlayerById(playerId);
+        if (existingPlayer == null) {
+            System.out.println("Player not found with ID: " + playerId);
+            return; // Exit the method if player not found
+        }
+
+        // Confirm player deletion with the user
+        System.out.print("Are you sure you want to delete this player? (Y/N): ");
+        String confirmation = scanner.next();
+        if (confirmation.equalsIgnoreCase("Y")) {
+            // Delete the player from the database using the PlayerDAO
+            playerDao.deletePlayer(playerId);
+            System.out.println("Entity deleted successfully.");
+        } else {
+            System.out.println("Entity deletion canceled.");
+        }
+    }
+
 
     // Example method demonstrating usage:
     public void displayAllPlayersAsJson() {
